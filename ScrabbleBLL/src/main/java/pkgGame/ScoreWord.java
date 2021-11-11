@@ -1,6 +1,7 @@
 package pkgGame;
 
 import java.util.ArrayList;
+
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -116,10 +117,37 @@ public class ScoreWord {
 	 * @return - TotalScore for the word
 	 * 
 	 */
-	private int CalculateWordScore() {
-		//TODO: Calculate the Word's score
+	private int CalculateWordScore() 
+	{
 		int iTotalScore = 0;
-
+		//TODO: Calculate the Word's score
+		for (Space s : this.tiles)
+		{
+			Space BoardSpace = this.board.getPuzzle()[s.getRow()][s.getCol()];
+			if ((BoardSpace.getBonusSquare() != null) && (BoardSpace.getBonusSquare().isUsed() == false) 
+					&& ((BoardSpace.getBonusSquare().getBonusType() == eBonusType.DoubleLetter)
+							|| (BoardSpace.getBonusSquare().getBonusType() == eBonusType.TripleLetter)))
+			{
+				BonusSquare bs = BoardSpace.getBonusSquare();
+				switch (bs.getBonusType())
+				{
+				case DoubleLetter:
+					
+					iTotalScore += (s.getLetter().getiScore() * 2);
+					break;
+					
+				case TripleLetter:
+					
+					iTotalScore += (s.getLetter().getiScore() * 3);
+					break;
+				}
+			}
+					
+			else 
+				
+				iTotalScore += s.getLetter().getiScore();
+		}
+		
 		return iTotalScore;
 	}
 

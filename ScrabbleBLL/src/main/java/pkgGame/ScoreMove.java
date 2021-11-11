@@ -27,9 +27,12 @@ public class ScoreMove {
 		return arrScoreWord;
 	}
 
-	public int CalculateScoreMove() {
-		//TODO: Calculate Score Move
-		return 0;
+	public int CalculateScoreMove() 
+	{
+		int sum = 0;
+		for(ScoreWord d : arrScoreWord)
+		    sum += d.getScore();
+		return sum;
 	}
 	
 	public eMoveResult findMoveResult()
